@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    
+    <!-- Embedded CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .todo-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        li button {
+            background-color: #dc3545;
+        }
+
+        li.completed {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-container">
+        <h1>To-Do List</h1>
+        <div class="input-group">
+            <input type="text" id="taskInput" placeholder="Add new task...">
+            <button onclick="addTask()">Add</button>
+        </div>
+        <ul id="todoList"></ul>
+    </div>
+
+    <!-- Embedded JavaScript -->
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const taskValue = taskInput.value.trim();
+
+            if (taskValue !== '') {
+                const li = document.createElement('li');
+                li.textContent = taskValue;
+
+                // Add a remove button to each task
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Remove';
+                removeBtn.onclick = function() {
+                    li.remove();
+                };
+                li.appendChild(removeBtn);
+
+                // Mark task as completed when clicked
+                li.onclick = function() {
+                    li.classList.toggle('completed');
+                };
+
+                document.getElementById('todoList').appendChild(li);
+                taskInput.value = '';
+            } else {
+                alert('Please enter a task.');
+            }
+        }
+    </script>
+</body>
+</html>
